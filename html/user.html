@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: right;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            text-align: center;
+        }
+
+        li {
+            display: block;
+            margin: 0;
+            padding: 14px 0;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        #title {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../php/logOut.php" style="color: red; text-decoration: none; padding-right: 20px;">ログアウト</a>
+    </header>
+
+    <h1 id="title">みんなの単位</h1>
+
+    <h2>ようこそ, {$username|escape}さん</h1>
+
+
+    <ul>
+        <li><a href="../php/input.php">授業評価入力</a></li>
+        <li><a href="../php/search.php">授業評価検索</a></li>
+        <li><a href="../php/archive.php">入力履歴</a></li>
+        <li><a href="../php/reauthenticate.php">登録情報変更</a></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授業検索</title>
+    <style>
+        th {
+            white-space: nowrap;
+            padding: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        /* 修正：tdのスタイルを変更 */
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            word-break: break-all;
+            /* 文字列がボックス外にはみ出しても折り返すようにする */
+        }
+
+        /* 新しく追加 */
+        .post-container {
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+            overflow-x: auto;
+            /* 横スクロールを有効にするために追加 */
+            position: relative;
+            /* 相対位置指定 */
+        }
+
+        /* 新しく追加 */
+        .edit-button {
+            position: absolute;
+            /* 絶対位置指定 */
+            top: 10px;
+            /* 上からの位置 */
+            right: 10px;
+            /* 右からの位置 */
+        }
+    </style>
+</head>
+
+<body>
+    <p><a href="../php/user.php">ユーザー画面トップへ</a></p>
+    
+    {$msg}
+    {foreach $results as $result}
+    <!-- 四角で囲む -->
+    <div class="post-container">
+        <!-- 情報変更ボタン -->
+        <form action="../php/update.php" method="POST">
+            <input type="submit" value="授業評価変更">
+            <input type="hidden" name="post_id" value="{$result.post_id}">
+            <input type="hidden" name="src" value="archive">
+            <input type="hidden" name="class" value="{$result.class}">
+        </form>
+        
+        <form action="../php/delete.php" method="POST" class="deleteForm">
+            <input type="submit" value="削除">
+            <input type="hidden" name="post_id" value="{$result.post_id}">
+        </form>
+        <!-- 投稿IDの表示を変更 -->
+        <h2>投稿ID {$result.post_id}</h2>
+
+        <table>
+            <tbody id="archive-results">
+                <tr>
+                    <td>授業名</td>
+                    <td>{$result.class}</td>
+                </tr>
+                <tr>
+                    <td>担当教員</td>
+                    <td>{$result.teacher}</td>
+                </tr>
+                <tr>
+                    <td>受講時期</td>
+                    <td>{$result.year} {$result.semester}</td>
+                </tr>
+                <tr>
+                    <td>出席のタイミング</td>
+                    <td>{$result.attendance}</td>
+                </tr>
+                <tr>
+                    <td>試験の実施方法</td>
+                    <td>{$result.exam}</td>
+                </tr>
+                <tr>
+                    <td>試験の難易度</td>
+                    <td>{$result.exam_difficulty}</td>
+                </tr>
+                <tr>
+                    <td>レポートの有無</td>
+                    <td>{$result.report}</td>
+                </tr>
+                <tr>
+                    <td>レポートの難易度</td>
+                    <td>{$result.report_difficulty}</td>
+                </tr>
+                <tr>
+                    <td>感想</td>
+                    <td>{$result.feedback}</td>
+                </tr>
+                <tr>
+                    <td>授業の難易度</td>
+                    <td>{$result.difficulty}</td>
+                </tr>
+                <tr>
+                    <td>授業の充実度</td>
+                    <td>{$result.interesting}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {/foreach}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteForms = document.querySelectorAll('.deleteForm'); // 削除フォームを取得する
+    
+            // 各削除フォームに対してイベントリスナーを設定
+            deleteForms.forEach(function (deleteForm) {
+                deleteForm.addEventListener('submit', function (event) {
+                    // ユーザー削除の確認ダイアログ
+                    const confirmed = confirm('本当に削除しますか？');
+                    if (!confirmed) {
+                        // キャンセルされた場合、submitイベントを止める
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+    
+
+</body>
+
+</html>

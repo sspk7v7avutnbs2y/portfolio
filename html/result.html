@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>授業検索</title>
+    <style>
+        #class{
+            text-align: center;
+        }
+
+        th {
+            white-space: nowrap;
+            padding: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            word-break: break-all;
+        }
+
+        .post-container {
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        .evaluation-container {
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        tr {
+            display: flex;
+        }
+
+        td {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <p><a href="../php/user.php">ユーザー画面トップへ</a></p>
+    <p><a href="../php/search.php">検索画面へ戻る</a></p>
+
+    <div class="evaluation-container">
+        <h2 id= "class">{$class}の授業評価</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <td>投稿件数</td>
+                    <td>{$postCount}</td>
+                </tr>
+                <tr>
+                    <td>試験難易度</td>
+                    <td>{$eScore}</td>
+                </tr>
+                <tr>
+                    <td>レポート難易度</td>
+                    <td>{$rScore}</td>
+                </tr>
+                <tr>
+                    <td>授業の難易度</td>
+                    <td>{$dScore}</td>
+                </tr>
+                <tr>
+                    <td>授業の充実度</td>
+                    <td>{$iScore}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {foreach $results as $result}
+    <!-- 四角で囲む -->
+    <div class="post-container">
+        <h2>{$result.name} さんの投稿</h2>
+        <table>
+            <tbody id="search-results">
+                <tr>
+                    <td>授業名</td>
+                    <td>{$result.class}</td>
+                </tr>
+                <tr>
+                    <td>担当教員</td>
+                    <td>{$result.teacher}</td>
+                </tr>
+                <tr>
+                    <td>受講時期</td>
+                    <td>{$result.year} {$result.semester}</td>
+                </tr>
+                <tr>
+                    <td>出席のタイミング</td>
+                    <td>{$result.attendance}</td>
+                </tr>
+                <tr>
+                    <td>試験の実施方法</td>
+                    <td>{$result.exam}</td>
+                </tr>
+                <tr>
+                    <td>試験の難易度</td>
+                    <td>{$result.exam_difficulty}</td>
+                </tr>
+                <tr>
+                    <td>レポートの有無</td>
+                    <td>{$result.report}</td>
+                </tr>
+                <tr>
+                    <td>レポートの難易度</td>
+                    <td>{$result.report_difficulty}</td>
+                </tr>
+                <tr>
+                    <td>感想</td>
+                    <td>{$result.feedback}</td>
+                </tr>
+                <tr>
+                    <td>授業の難易度</td>
+                    <td>{$result.difficulty}</td>
+                </tr>
+                <tr>
+                    <td>授業の充実度</td>
+                    <td>{$result.interesting}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {/foreach}
+</body>
+
+</html>
